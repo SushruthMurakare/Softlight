@@ -168,7 +168,7 @@
           '<div style="text-align: center; padding: 20px;">Loading...</div>';
         runBtn.disabled = true;
         try {
-          const response = await fetch("http://localhost:3000/run-task", {
+          const response = await fetch("/run-task", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
