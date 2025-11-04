@@ -6,7 +6,7 @@ const path = require('path');
 const { runAutomation } = require('./index.js'); 
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const activeTasks = new Map();
 
 // Middleware
