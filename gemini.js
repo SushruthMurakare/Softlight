@@ -1,4 +1,4 @@
-const { cleanHTMLForPlaywright } = require("./minimizePageContent");
+
 
 const API_KEY = "AIzaSyAbNTANkYy7Jf7ebx0nhJsx8Mcjwf9gdbc";
 const MODEL_NAME = "gemini-2.5-flash-preview-09-2025";
