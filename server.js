@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'frontend.html'));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
   console.log(`📂 Open your browser to http://localhost:${PORT}`);
 });
