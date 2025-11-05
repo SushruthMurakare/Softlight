@@ -94,6 +94,13 @@
         overflow-y: auto;
         max-height: 400px;
         width: 60%;
+        overflow-x: hidden;
+      }
+      .status-box img {
+        width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
+        max-width: 100% !important;
       }
 
       .status-box:empty::before {
@@ -196,7 +203,6 @@
           runBtn.style.display = "inline-block";
         }
       });
-
 
       function showResult(result) {
         statusBox.innerHTML = `
