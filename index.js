@@ -15,7 +15,6 @@ const runAutomation = async (task) => {
   browser = await chromium.launch({
     headless: true,
      args: [
-    "--start-maximized",
     "--no-sandbox",
     "--disable-setuid-sandbox",
     "--disable-dev-shm-usage"
@@ -23,8 +22,11 @@ const runAutomation = async (task) => {
   });
 
   const context = await browser.newContext({
-    viewport: null,
-  });
+  viewport: {
+    width: 1920,
+    height: 1080
+  }
+});
   const page = await context.newPage();
   await page.goto(url);
 
