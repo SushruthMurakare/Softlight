@@ -11,7 +11,7 @@ const runAutomation = async (task) => {
   const url = await getWebsiteURL(task);
   //const url = "https://www.amazon.com";
   const browser = await chromium.launch({
-    headless: false,
+    headless: true,
     args: ["--start-maximized"],
   });
 
