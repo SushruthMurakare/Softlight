@@ -1,4 +1,4 @@
-const fs = require('fs');
+//const fs = require("fs");
 
 
 const  generateHTMLGuide = (steps, taskDescription) => {
@@ -23,7 +23,7 @@ const  generateHTMLGuide = (steps, taskDescription) => {
             padding: 20px;
         }
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
             background: white;
             padding: 40px;
@@ -72,13 +72,17 @@ const  generateHTMLGuide = (steps, taskDescription) => {
             flex: 1;
         }
 
-        .screenshot {
-            width: 100%;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin: 20px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+      .screenshot {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-width: 100%; 
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: block;
+}
         .guidance {
             background: #d4edda;
             padding: 20px;
@@ -99,10 +103,6 @@ const  generateHTMLGuide = (steps, taskDescription) => {
             body {
                 background: white;
                 padding: 0;
-            }
-            .container {
-                box-shadow: none;
-                padding: 20px;
             }
         }
     </style>
@@ -142,9 +142,9 @@ ${steps.map(step => `
   `;
 
   //Write the HTML file
-  const filename = `automation-guide-${Date.now()}.html`;
-  fs.writeFileSync(filename, html);
+//   const filename = `automation-guide-${Date.now()}.html`;
+//   fs.writeFileSync(filename, html);
   return html;
-}
+};
 
-module.exports = {generateHTMLGuide};
+module.exports = { generateHTMLGuide };
