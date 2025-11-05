@@ -17,8 +17,6 @@ app.use(express.static('public')); // Serve your HTML file from 'public' folder
 // API endpoint to run automation tasks
 app.post('/run-task', async (req, res) => {
   const { task } = req.body;
-  const taskId = Date.now().toString();
-
   if (!task) {
     return res.status(400).json({ 
       success: false, 
@@ -27,19 +25,6 @@ app.post('/run-task', async (req, res) => {
   }
 
   console.log(`Received task: ${task}`);
-
-  let isAborted = false;
-  req.on('close', () => {
-    console.log('⚠️ Client disconnected, stopping task...');
-    isAborted = true;
-    
-    // Close the browser if it exists
-    const task = activeTasks.get(taskId);
-    if (task && task.browser) {
-      task.browser.close().catch(console.error);
-    }
-    activeTasks.delete(taskId);
-  });
 
   try {
     const result = await runAutomation(task);
