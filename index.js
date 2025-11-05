@@ -15,6 +15,7 @@ const runAutomation = async (task) => {
   browser = await chromium.launch({
     headless: true,
      args: [
+    "--start-maximized",
     "--no-sandbox",
     "--disable-setuid-sandbox",
     "--disable-dev-shm-usage"
