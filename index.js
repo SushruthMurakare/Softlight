@@ -11,7 +11,7 @@ const runAutomation = async (task) => {
   const url = await getWebsiteURL(task);
   //const url = "https://www.amazon.com";
   const browser = await chromium.launch({
-    headless: true,
+    headless: false,
     args: ["--start-maximized"],
   });
 
@@ -45,6 +45,13 @@ const runAutomation = async (task) => {
 
     if (gptResponse.taskComplete === true) {
       taskCompleted = true;
+      const finalScreenshot = await page.screenshot();
+      guideSteps.push({
+        stepNumber: step + 1,
+        screenshot: finalScreenshot.toString("base64"),
+        guidance: gptResponse?.guidance || "Task completed successfully",
+      });
+
       break;
     }
 
@@ -115,10 +122,6 @@ const runAutomation = async (task) => {
         console.error(" Max retries reached. Stopping automation.");
         taskCompleted = true;
       }
-    }
-
-    if (taskCompleted || retryCount >= MAX_RETRIES) {
-      await browser.close();
     }
   }
   if (taskCompleted || retryCount >= MAX_RETRIES) {
