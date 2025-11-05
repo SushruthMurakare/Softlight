@@ -10,9 +10,15 @@ const runAutomation = async (task) => {
   const guideSteps = [];
   const url = await getWebsiteURL(task);
   //const url = "https://www.amazon.com";
+
+  try{
   const browser = await chromium.launch({
     headless: true,
-    args: ["--start-maximized"],
+     args: [
+    "--no-sandbox",
+    "--disable-setuid-sandbox",
+    "--disable-dev-shm-usage"
+  ],
   });
 
   const context = await browser.newContext({
@@ -25,7 +31,7 @@ const runAutomation = async (task) => {
   let step = 0;
   let lastError = null;
   let failedAction = null;
-  const MAX_RETRIES = 4;
+  const MAX_RETRIES = 3;
   let retryCount = 0;
 
   while (!taskCompleted && retryCount < MAX_RETRIES) {
@@ -130,6 +136,12 @@ const runAutomation = async (task) => {
   if (finalHTML) {
     return finalHTML;
   }
+}
+finally{
+   if (browser) {
+      await browser.close().catch(console.error);
+    }
+}
 };
 
 module.exports = { runAutomation };
