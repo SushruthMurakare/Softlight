@@ -10,9 +10,9 @@ const runAutomation = async (task) => {
   const guideSteps = [];
   const url = await getWebsiteURL(task);
   //const url = "https://www.amazon.com";
-
+  let browser;
   try{
-  const browser = await chromium.launch({
+  browser = await chromium.launch({
     headless: true,
      args: [
     "--no-sandbox",
