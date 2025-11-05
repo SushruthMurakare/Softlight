@@ -88,7 +88,12 @@ const runAutomation = async (task) => {
           //   path: `screenshots/inner-${i + 1}.png`,
           // });
           console.log("Step:", i + 1, "Action:", action);
-
+          step += 1;
+          guideSteps.push({
+            stepNumber: step,
+            screenshot: screenshot.toString("base64"),
+            guidance: gptResponse?.guidance || "No guidance provided",
+          });
           await page.waitForTimeout(1000);
           lastError = null;
           failedAction = null;
@@ -106,13 +111,6 @@ const runAutomation = async (task) => {
           throw actionError;
         }
       }
-
-      step += 1;
-      guideSteps.push({
-        stepNumber: step,
-        screenshot: screenshot.toString("base64"),
-        guidance: gptResponse?.guidance || "No guidance provided",
-      });
     } catch (err) {
       console.error(
         `Retry ${retryCount}/${MAX_RETRIES} - Error: ${err.message}`
